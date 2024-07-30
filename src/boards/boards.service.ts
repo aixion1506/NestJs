@@ -22,15 +22,19 @@ export class BoardsService {
 
     this.boards.push(board);
     return board;
+    // {
+    //   "id": "09614540-4e4e-11ef-a0b8-97c2ec39f826",
+    //   "title": "Board 1",
+    //   "description": "Description 1",
+    //   "status": "PUBLIC"
+    // }
   }
 
   getBoardById(id: string): Board {
     return this.boards.find((board) => board.id === id);
   }
-  // {
-  //   "id": "09614540-4e4e-11ef-a0b8-97c2ec39f826",
-  //   "title": "Board 1",
-  //   "description": "Description 1",
-  //   "status": "PUBLIC"
-  // }
+
+  deleteBoard(id: string): void {
+    this.boards = this.boards.filter((board) => board.id !== id);
+  }
 }
