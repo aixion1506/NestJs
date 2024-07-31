@@ -12,6 +12,8 @@ import {
 import { BoardsService } from './boards.service';
 import { Board, BoardStatus } from './boards.model';
 import { CreateBoardDto } from './dto/create-board.dto';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+// import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('boards')
 export class BoardsController {
@@ -23,6 +25,17 @@ export class BoardsController {
   }
 
   @Post()
+  // @ApiBearerAuth()
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiOperation({
+    summary: '게시판 추가하기',
+    description: `# 게시판 추가하기
+    - 할게 너무 많아...`,
+  })
   @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto): Board {
     return this.boardsService.createBoard(createBoardDto);
