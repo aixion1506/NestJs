@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
-import { Board, BoardStatus } from './boards.model';
+import { BoardStatus } from './boards-status.enum';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
@@ -20,43 +20,43 @@ import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe'
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
-  @Get('/')
-  getAllBoard(): Board[] {
-    return this.boardsService.getAllBoards();
-  }
+  // @Get('/')
+  // getAllBoard(): Board[] {
+  //   return this.boardsService.getAllBoards();
+  // }
 
-  @Post()
-  // @ApiBearerAuth()
-  @ApiResponse({
-    status: 201,
-    description: 'The record has been successfully created.',
-  })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiOperation({
-    summary: '게시판 추가하기',
-    description: `# 게시판 추가하기
-    - 할게 너무 많아...`,
-  })
-  @UsePipes(ValidationPipe)
-  createBoard(@Body() createBoardDto: CreateBoardDto): Board {
-    return this.boardsService.createBoard(createBoardDto);
-  }
+  // @Post()
+  // // @ApiBearerAuth()
+  // @ApiResponse({
+  //   status: 201,
+  //   description: 'The record has been successfully created.',
+  // })
+  // @ApiResponse({ status: 403, description: 'Forbidden.' })
+  // @ApiOperation({
+  //   summary: '게시판 추가하기',
+  //   description: `# 게시판 추가하기
+  //   - 할게 너무 많아...`,
+  // })
+  // @UsePipes(ValidationPipe)
+  // createBoard(@Body() createBoardDto: CreateBoardDto): Board {
+  //   return this.boardsService.createBoard(createBoardDto);
+  // }
 
-  @Get('/:id')
-  getBoardById(@Param('id') id: string) {
-    return this.boardsService.getBoardById(id);
-  }
+  // @Get('/:id')
+  // getBoardById(@Param('id') id: string) {
+  //   return this.boardsService.getBoardById(id);
+  // }
 
-  @Delete('/:id')
-  deleteBoard(@Param('id') id: string): void {
-    this.boardsService.deleteBoard(id);
-  }
+  // @Delete('/:id')
+  // deleteBoard(@Param('id') id: string): void {
+  //   this.boardsService.deleteBoard(id);
+  // }
 
-  @Patch('/:id/status')
-  updateBoardStatus(
-    @Param('id') id: string,
-    @Body('status', BoardStatusValidationPipe) status: BoardStatus
-  ) {
-    return this.boardsService.updateBoardStatus(id, status);
-  }
+  // @Patch('/:id/status')
+  // updateBoardStatus(
+  //   @Param('id') id: string,
+  //   @Body('status', BoardStatusValidationPipe) status: BoardStatus
+  // ) {
+  //   return this.boardsService.updateBoardStatus(id, status);
+  // }
 }
