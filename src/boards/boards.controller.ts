@@ -25,11 +25,7 @@ import { BoardStatus } from './boards-status.enum';
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
-  // @Get('/')
-  // getAllBoard(): Board[] {
-  //   return this.boardsService.getAllBoards();
-  // }
-
+  // Swagger 예제
   // @Post()
   // // @ApiBearerAuth()
   // @ApiResponse({
@@ -46,6 +42,11 @@ export class BoardsController {
   // createBoard(@Body() createBoardDto: CreateBoardDto): Board {
   //   return this.boardsService.createBoard(createBoardDto);
   // }
+
+  @Get('/')
+  getAllBoard(): Promise<Board[]> {
+    return this.boardsService.getAllBoards();
+  }
 
   @Post()
   @UsePipes(ValidationPipe)
@@ -70,11 +71,4 @@ export class BoardsController {
   ) {
     return this.boardsService.updateBoardStatus(id, status);
   }
-  // @Patch('/:id/status')
-  // updateBoardStatus(
-  //   @Param('id') id: string,
-  //   @Body('status', BoardStatusValidationPipe) status: BoardStatus
-  // ) {
-  //   return this.boardsService.updateBoardStatus(id, status);
-  // }
 }

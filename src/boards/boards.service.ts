@@ -9,9 +9,10 @@ import { BoardStatus } from './boards-status.enum';
 export class BoardsService {
   constructor(private boardRepository: BoardRepository) {}
 
-  // getAllBoards(): Board[] {
-  //   return this.boards;
-  // }
+  // 전체 게시물 조회
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find({ order: { id: 'ASC' } });
+  }
 
   // 게시물 생성
   createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
