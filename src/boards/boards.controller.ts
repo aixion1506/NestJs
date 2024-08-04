@@ -1,19 +1,15 @@
 import {
-  Body,
+  // Body,
   Controller,
-  Delete,
   Get,
   Param,
-  Patch,
-  Post,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
-import { BoardStatus } from './boards-status.enum';
-import { CreateBoardDto } from './dto/create-board.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
+import { Board } from './board.entity';
+// import { BoardStatus } from './boards-status.enum';
+// import { CreateBoardDto } from './dto/create-board.dto';
+// import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+// import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 // import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('boards')
@@ -42,10 +38,10 @@ export class BoardsController {
   //   return this.boardsService.createBoard(createBoardDto);
   // }
 
-  // @Get('/:id')
-  // getBoardById(@Param('id') id: string) {
-  //   return this.boardsService.getBoardById(id);
-  // }
+  @Get('/:id')
+  getBoardById(@Param('id') id: number): Promise<Board> {
+    return this.boardsService.getBoardById(id);
+  }
 
   // @Delete('/:id')
   // deleteBoard(@Param('id') id: string): void {

@@ -1,9 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { v1 as uuid } from 'uuid';
-import { CreateBoardDto } from './dto/create-board.dto';
+import { BoardRepository } from './board.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Board } from './board.entity';
 
 @Injectable()
 export class BoardsService {
+  constructor(
+    @InjectRepository(BoardRepository)
+    private boardRepository: BoardRepository
+  ) {}
+
   // 메모리에 저장하는 방식
   // private boards: Board[] = [];
   // getAllBoards(): Board[] {
@@ -26,12 +32,13 @@ export class BoardsService {
   //   //   "status": "PUBLIC"
   //   // }
   // }
-  // getBoardById(id: string): Board {
-  //   const found = this.boards.find((board) => board.id === id);
-  //   if (!found)
-  //     throw new NotFoundException(`Can not find Board width id ${id}`);
-  //   return found;
-  // }
+  async getBoardById(id: number): Promise<Board> {
+    const found = await this.boardRepository.findOne({ where: { id } });
+
+    if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
+
+    return found;
+  }
   // deleteBoard(id: string): void {
   //   const found = this.getBoardById(id);
   //   this.boards = this.boards.filter((board) => board.id !== found.id);
