@@ -3,7 +3,6 @@ import { BoardRepository } from './board.repository';
 // import { InjectRepository } from '@nestjs/typeorm';
 import { Board } from './board.entity';
 import { CreateBoardDto } from './dto/create-board.dto';
-import { BoardStatus } from './boards-status.enum';
 
 @Injectable()
 export class BoardsService {
@@ -14,17 +13,8 @@ export class BoardsService {
   // }
 
   // 게시물 생성
-  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
-    const { title, description } = createBoardDto;
-
-    const board = this.boardRepository.create({
-      title,
-      description,
-      status: BoardStatus.PUBLIC,
-    });
-
-    await this.boardRepository.save(board);
-    return board;
+  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto);
   }
 
   // 특정 ID 조회
