@@ -1,13 +1,17 @@
 import {
+  Body,
   // Body,
   Controller,
   Get,
   Param,
+  Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './board.entity';
+import { CreateBoardDto } from './dto/create-board.dto';
 // import { BoardStatus } from './boards-status.enum';
-// import { CreateBoardDto } from './dto/create-board.dto';
 // import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 // import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 // import { ApiBearerAuth } from '@nestjs/swagger';
@@ -37,6 +41,12 @@ export class BoardsController {
   // createBoard(@Body() createBoardDto: CreateBoardDto): Board {
   //   return this.boardsService.createBoard(createBoardDto);
   // }
+
+  @Post()
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(createBoardDto);
+  }
 
   @Get('/:id')
   getBoardById(@Param('id') id: number): Promise<Board> {
