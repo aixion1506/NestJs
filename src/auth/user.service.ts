@@ -7,9 +7,8 @@ import { User } from './user.entity';
 export class AuthService {
   constructor(private userRepository: UserRepository) {}
 
+  // 유저 회원가입
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    console.log('createUser-service');
-
     return this.userRepository.createUser(authCredentialsDto);
   }
 
