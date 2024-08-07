@@ -16,7 +16,6 @@ import { Board } from './board.entity';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 import { BoardStatus } from './boards-status.enum';
-// import { BoardStatus } from './boards-status.enum';
 // import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 // import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 // import { ApiBearerAuth } from '@nestjs/swagger';
